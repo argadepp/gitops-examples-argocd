@@ -2,11 +2,11 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: quarkus-app
-  namespace: argocd
+  namespace: utilities
 spec:
   project: default
   source:
-    path: kustomize-and-helm/app/overlays/default
+    path: kustomize-and-helm/app/base
     repoURL: https://github.com/christianh814/gitops-examples
     targetRevision: main
   destination:
