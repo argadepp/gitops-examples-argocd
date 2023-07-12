@@ -1,27 +1,18 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  annotations:
-    notifications.argoproj.io/subscribe.on-sync-succeeded.slack: argocd-pratik
-  finalizers:
-  - resources-finalizer.argocd.argoproj.io
-  name: docker-argocd
+  name: pricelist-app
   namespace: utilities
 spec:
   destination:
-    namespace: monitoring
+    namespace: utilities
     server: https://kubernetes.default.svc
   project: default
   source:
-    chart: thanos
-    repoURL: https://github.com/argadepp/gitops-examples-argocd.git
-    targetRevision: main
     path: argocd-docker
+    repoURL: https://github.com/argadepp/gitops-examples-argocd
+    targetRevision: main
   syncPolicy:
-    automated: # automated sync by default retries failed attempts 5 times with following delays between attempts ( 5s, 10s, 20s, 40s, 80s ); retry controlled using `retry` field.
-      prune: true # Specifies if resources should be pruned during auto-syncing ( false by default ).
-      selfHeal: true # Specifies if partial app sync should be executed when resources are changed only in target Kubernetes cluster and no git change detected ( false by default ).
-      allowEmpty: false # Allows deleting all application resources during automatic syncing ( false by default ).
-    syncOptions:
-    - ServerSideApply=true
-    - CreateNamespace=true
+    automated:
+      prune: true
+      selfHeal: true

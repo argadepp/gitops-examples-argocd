@@ -17,6 +17,6 @@ spec:
         app: calc
     spec:
       containers:
-      - image: 9673483686/calc:test
+      - image: 9673483686/calc:test2
         name: calc
 
